@@ -8,10 +8,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,9 +54,11 @@ public class AuthController {
             loginRequest.getPassword())
         );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        final String jwt = jwtUtils.generateJwtToken(authentication);
+        final SecurityContext context = SecurityContextHolder.getContext();
 
+        context.setAuthentication(authentication);
+
+        final String jwt = jwtUtils.generateJwtToken(authentication);
         final UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         final List<String> roles = userDetails.getAuthorities().stream()
             .map(item -> item.getAuthority())
@@ -72,7 +76,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody final SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                 .badRequest()
@@ -91,37 +95,46 @@ public class AuthController {
             encoder.encode(signUpRequest.getPassword())
         );
 
-        Set<String> strRoles = signUpRequest.getRoles();
-        Set<Role> roles = new HashSet<>();
+        final Set<String> strRoles = signUpRequest.getRoles();
+        final Set<Role> roles = new HashSet<>();
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+        if (CollectionUtils.isNotEmpty(strRoles)) {
+            final Role userRole = roleRepository
+                .findByName(ERole.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                        final Role adminRole = roleRepository
+                            .findByName(ERole.ROLE_ADMIN)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
                         roles.add(adminRole);
 
                         break;
                     case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                        final Role modRole = roleRepository
+                            .findByName(ERole.ROLE_MODERATOR)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
                         roles.add(modRole);
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                        final Role userRole = roleRepository
+                            .findByName(ERole.ROLE_USER)
                             .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+
                         roles.add(userRole);
                 }
             });
         }
 
         user.setRoles(roles);
+
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

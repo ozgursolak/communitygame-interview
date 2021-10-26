@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -37,12 +38,14 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         try {
             final String jwt = parseJwt(request);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+
+            if (Objects.nonNull(jwt) && jwtUtils.validateJwtToken(jwt)) {
                 final String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userDetails, null,
+                    userDetails,
+                    null,
                     userDetails.getAuthorities()
                 );
 
@@ -66,6 +69,4 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
         return null;
     }
-
-
 }

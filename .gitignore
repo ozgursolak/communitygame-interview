@@ -5,3 +5,5 @@ logs/
 h2/
 *.iml
 *.swp
+*.cmd
+mvnw

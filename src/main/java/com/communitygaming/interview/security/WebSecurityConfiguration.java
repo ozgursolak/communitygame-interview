@@ -1,8 +1,5 @@
 package com.communitygaming.interview.security;
 
-import com.communitygaming.interview.security.jwt.AuthEntryPointJwt;
-import com.communitygaming.interview.security.jwt.AuthTokenFilter;
-import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +13,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.communitygaming.interview.security.jwt.AuthEntryPointJwt;
+import com.communitygaming.interview.security.jwt.AuthTokenFilter;
+import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity

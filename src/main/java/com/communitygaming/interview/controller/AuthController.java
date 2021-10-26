@@ -7,17 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.communitygaming.interview.model.ERole;
-import com.communitygaming.interview.model.Role;
-import com.communitygaming.interview.model.User;
-import com.communitygaming.interview.payload.request.LoginRequest;
-import com.communitygaming.interview.payload.request.SignupRequest;
-import com.communitygaming.interview.payload.response.JwtResponse;
-import com.communitygaming.interview.payload.response.MessageResponse;
-import com.communitygaming.interview.repository.RoleRepository;
-import com.communitygaming.interview.repository.UserRepository;
-import com.communitygaming.interview.security.jwt.JwtUtils;
-import com.communitygaming.interview.security.service.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +19,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.communitygaming.interview.model.ERole;
+import com.communitygaming.interview.model.Role;
+import com.communitygaming.interview.model.User;
+import com.communitygaming.interview.payload.request.LoginRequest;
+import com.communitygaming.interview.payload.request.SignupRequest;
+import com.communitygaming.interview.payload.response.JwtResponse;
+import com.communitygaming.interview.payload.response.MessageResponse;
+import com.communitygaming.interview.repository.RoleRepository;
+import com.communitygaming.interview.repository.UserRepository;
+import com.communitygaming.interview.security.jwt.JwtUtils;
+import com.communitygaming.interview.security.service.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

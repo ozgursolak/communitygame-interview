@@ -1,13 +1,14 @@
 package com.communitygaming.interview.security.service;
 
-import com.communitygaming.interview.model.User;
-import com.communitygaming.interview.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.communitygaming.interview.model.User;
+import com.communitygaming.interview.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor

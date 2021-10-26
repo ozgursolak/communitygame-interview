@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +18,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
 
 @Component
 @AllArgsConstructor

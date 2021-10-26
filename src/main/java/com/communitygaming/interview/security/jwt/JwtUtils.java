@@ -2,7 +2,6 @@ package com.communitygaming.interview.security.jwt;
 
 import java.util.Date;
 
-import com.communitygaming.interview.security.service.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -14,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+
+import com.communitygaming.interview.security.service.UserDetailsImpl;
 
 @Component
 public class JwtUtils {

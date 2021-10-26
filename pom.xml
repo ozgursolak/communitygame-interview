@@ -14,12 +14,20 @@
 	<name>interview</name>
 	<description>Interview Project for Community Gaming</description>
 	<properties>
+		<!-- Build related dependencies -->
 		<java.version>11</java.version>
+
+		<!-- Other dependencies -->
+		<ispringfox-swagger2.version>2.9.2</ispringfox-swagger2.version>
+		<hibernate-validator.version>6.0.9.Final</hibernate-validator.version>
+		<io-jsonwebtoken.version>0.9.1</io-jsonwebtoken.version>
+		<jaxb-runtime.version>2.3.2</jaxb-runtime.version>
+		<jakarta.xml.bind-api.version>2.3.2</jakarta.xml.bind-api.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -44,6 +52,31 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${ispringfox-swagger2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${io-jsonwebtoken.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+			<version>${jakarta.xml.bind-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>${jaxb-runtime.version}</version>
 		</dependency>
 	</dependencies>
 

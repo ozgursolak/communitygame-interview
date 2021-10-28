@@ -22,7 +22,7 @@ public class JwtResponse {
         return token;
     }
 
-    public void setAccessToken(String accessToken) {
+    public void setAccessToken(final String accessToken) {
         this.token = accessToken;
     }
 
@@ -30,7 +30,7 @@ public class JwtResponse {
         return type;
     }
 
-    public void setTokenType(String tokenType) {
+    public void setTokenType(final String tokenType) {
         this.type = tokenType;
     }
 
@@ -38,7 +38,7 @@ public class JwtResponse {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -46,7 +46,7 @@ public class JwtResponse {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -54,7 +54,7 @@ public class JwtResponse {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 

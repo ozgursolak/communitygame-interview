@@ -8,8 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,12 +22,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
 
 @Component
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class AuthTokenFilter extends OncePerRequestFilter {
 
-    private  JwtUtils jwtUtils;
-    private  UserDetailsServiceImpl userDetailsService;
+    private  final JwtUtils jwtUtils;
+    private  final UserDetailsServiceImpl userDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -41,7 +39,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
             if (Objects.nonNull(jwt) && jwtUtils.validateJwtToken(jwt)) {
                 final String username = jwtUtils.getUserNameFromJwtToken(jwt);
-
                 final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
                 final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     userDetails,

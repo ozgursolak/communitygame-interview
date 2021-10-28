@@ -34,7 +34,7 @@ import com.communitygaming.interview.repository.UserRepository;
 import com.communitygaming.interview.security.jwt.JwtUtils;
 import com.communitygaming.interview.security.service.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "localhost", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -48,7 +48,6 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody final LoginRequest loginRequest) {
-
         final Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
             loginRequest.getPassword())

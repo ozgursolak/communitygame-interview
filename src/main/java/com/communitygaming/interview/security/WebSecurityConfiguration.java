@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.communitygaming.interview.security.jwt.AuthEntryPointJwt;
 import com.communitygaming.interview.security.jwt.AuthTokenFilter;
 import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
+import com.communitygaming.interview.security.jwt.JwtUtils;
 
 @Configuration
 @EnableWebSecurity
@@ -25,14 +26,15 @@ import com.communitygaming.interview.security.service.UserDetailsServiceImpl;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserDetailsServiceImpl userDetailsService;
     private final AuthEntryPointJwt unauthorizedHandler;
+    private final JwtUtils jwtUtils;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
+        return new AuthTokenFilter(this.jwtUtils, this.userDetailsService);
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+    public void configure(final AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 

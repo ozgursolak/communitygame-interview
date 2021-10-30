@@ -32,6 +32,10 @@ input SignupRequest {
     password: String!,
 }
 
+input LoginRequest {
+    username: String!,
+    password: String!,
+}
 
 type TournamentResponse {
     id : String!
@@ -41,6 +45,15 @@ type MessageResponse {
     message : String!
 }
 
+type JwtResponse {
+    token: String,
+    type: String,
+    id: String,
+    username: String,
+    email: String,
+    roles: [String]
+}
+
 type Query {
     tournaments:[Tournament]
 }
@@ -48,4 +61,5 @@ type Query {
 type Mutation {
     createTournament(tournamentRequest:TournamentRequest):TournamentResponse
     registerUser(signupRequest:SignupRequest):MessageResponse
+    signIn(loginRequest:LoginRequest):JwtResponse
 }

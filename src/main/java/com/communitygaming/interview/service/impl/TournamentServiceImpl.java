@@ -20,8 +20,8 @@ public class TournamentServiceImpl implements TournamentService {
 
     private final TournamentRepository tournamentRepository;
 
-    @Transactional
     @Override
+    @Transactional
     public TournamentResponse createTournament(final TournamentRequest tournamentRequest) {
         final Tournament tournament = new Tournament();
 

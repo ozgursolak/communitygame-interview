@@ -81,7 +81,7 @@ public class UserServiceImpl  implements UserService {
         final Set<String> strRoles = signUpRequest.getRoles();
         final Set<Role> roles = new HashSet<>();
 
-        if (CollectionUtils.isNotEmpty(strRoles)) {
+        if (CollectionUtils.isEmpty(strRoles)) {
             final Role userRole = getUserRole(ERole.ROLE_USER);
 
             roles.add(userRole);

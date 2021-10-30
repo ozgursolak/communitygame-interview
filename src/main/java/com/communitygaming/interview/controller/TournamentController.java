@@ -25,8 +25,8 @@ public class TournamentController {
     @PostMapping("/tournament")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<?>  createTournament(@Valid @RequestBody final TournamentRequest tournamentRequest) {
-        final String id = tournamentService.createTournament(tournamentRequest);
+        final TournamentResponse tournamentResponse = tournamentService.createTournament(tournamentRequest);
 
-        return ResponseEntity.ok(new TournamentResponse(id));
+        return ResponseEntity.ok(tournamentResponse);
     }
 }

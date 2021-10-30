@@ -1,5 +1,6 @@
 package com.communitygaming.interview.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.communitygaming.interview.model.ETournamentType;
 import com.communitygaming.interview.model.Tournament;
 import com.communitygaming.interview.payload.request.TournamentRequest;
+import com.communitygaming.interview.payload.response.TournamentResponse;
 import com.communitygaming.interview.repository.TournamentRepository;
 import com.communitygaming.interview.service.TournamentService;
 
@@ -20,7 +22,7 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Transactional
     @Override
-    public String createTournament(final TournamentRequest tournamentRequest) {
+    public TournamentResponse createTournament(final TournamentRequest tournamentRequest) {
         final Tournament tournament = new Tournament();
 
         populateTournament(tournament, tournamentRequest);
@@ -28,8 +30,15 @@ public class TournamentServiceImpl implements TournamentService {
         tournamentRepository.save(tournament);
 
         final String tournamentId = tournament.getId();
+        final TournamentResponse tournamentResponse = new TournamentResponse(tournamentId);
 
-        return tournamentId;
+        return tournamentResponse;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Tournament> getAllTournaments() {
+        return tournamentRepository.findAll();
     }
 
     private void populateTournament(final Tournament tournament, final TournamentRequest tournamentRequest) {

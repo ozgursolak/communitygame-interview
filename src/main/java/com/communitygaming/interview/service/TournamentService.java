@@ -1,8 +1,13 @@
 package com.communitygaming.interview.service;
 
+import java.util.List;
+
+import com.communitygaming.interview.model.Tournament;
 import com.communitygaming.interview.payload.request.TournamentRequest;
+import com.communitygaming.interview.payload.response.TournamentResponse;
 
 public interface TournamentService {
 
-    String createTournament(TournamentRequest tournamentRequest);
+    TournamentResponse createTournament(TournamentRequest tournamentRequest);
+    List<Tournament> getAllTournaments();
 }

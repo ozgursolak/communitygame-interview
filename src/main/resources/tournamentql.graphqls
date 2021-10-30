@@ -1,0 +1,51 @@
+type Tournament {
+    id: ID!,
+    tournamentName: String!,
+    organizerName: String!,
+    quota: Int!,
+    target: Float,
+    currency: String,
+    startDate: String!,
+    endDate: String!,
+    description: String,
+    tournamentAddress: String,
+    isActive: Boolean
+}
+
+input TournamentRequest {
+    tournamentName: String!,
+    organizerName: String!,
+    quota: Int!,
+    target: Float,
+    currency: String,
+    startDate: String!,
+    endDate: String!,
+    description: String,
+    tournamentAddress: String,
+    isActive: Boolean
+}
+
+input SignupRequest {
+    username: String!,
+    email: String!,
+    roles: [String],
+    password: String!,
+}
+
+
+type TournamentResponse {
+    id : String!
+}
+
+type MessageResponse {
+    message : String!
+}
+
+type Query {
+    tournaments:[Tournament]
+}
+
+type Mutation {
+    createTournament(tournamentRequest:TournamentRequest):TournamentResponse
+    registerUser(signupRequest:SignupRequest):MessageResponse
+}

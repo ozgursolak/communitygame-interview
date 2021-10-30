@@ -1,6 +1,6 @@
 package com.communitygaming.interview.model;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,15 +16,19 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Tournament {
 
     @Id
+    @NotBlank
     private String id;
 
     @Field(name = "tournament_name")
+    @NotBlank
     private String tournamentName;
 
     @Field(name = "organizer_name")
+    @NotBlank
     private String organizerName;
 
     @Field(name = "quota")
+    @NotBlank
     private int quota;
 
     @Field(name = "target")
@@ -34,9 +38,11 @@ public class Tournament {
     private String currency = "$";
 
     @Field(name = "start_date")
+    @NotBlank
     private String startDate;
 
     @Field(name = "end_date")
+    @NotBlank
     private String endDate;
 
     @Field(name = "tournament_type")

@@ -1,1 +1,1 @@
-# communitygame-interview
+# Community Game Case Study
